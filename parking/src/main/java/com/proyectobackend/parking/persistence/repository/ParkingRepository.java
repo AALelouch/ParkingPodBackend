@@ -1,0 +1,13 @@
+package com.proyectobackend.parking.persistence.repository;
+
+import com.proyectobackend.parking.persistence.entity.Parking;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
+
+public interface ParkingRepository extends JpaRepository<Parking, Long> {
+
+    @Query("select p from Parking p where p.available = true")
+    List<Parking> findAllAvailable();
+}
