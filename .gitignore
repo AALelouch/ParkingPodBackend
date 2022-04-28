@@ -21,3 +21,16 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/.idea/libraries/Maven__antlr_antlr_2_7_7.xml
+/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_13_2.xml
+/.idea/libraries/Maven__com_sun_istack_istack_commons_runtime_3_0_12.xml
+/parking/target/classes/application.properties
+/parking/target/
+/.idea/
+parking/.idea/
+*.sql
+*.md
+*.iml
+/parking/.mvn/wrapper/maven-wrapper.properties
+/parking/mvnw
+/parking/mvnw.cmd
