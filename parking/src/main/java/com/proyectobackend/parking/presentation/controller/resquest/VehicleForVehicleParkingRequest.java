@@ -9,12 +9,4 @@ import lombok.Setter;
 public class VehicleForVehicleParkingRequest {
     @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private Long id;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

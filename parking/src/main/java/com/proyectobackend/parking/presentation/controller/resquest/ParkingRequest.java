@@ -14,28 +14,4 @@ public class ParkingRequest {
     private double priceHour;
     @JsonProperty("priceDay")
     private double priceDay;
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
-
-    public double getPriceHour() {
-        return priceHour;
-    }
-
-    public void setPriceHour(double priceHour) {
-        this.priceHour = priceHour;
-    }
-
-    public double getPriceDay() {
-        return priceDay;
-    }
-
-    public void setPriceDay(double priceDay) {
-        this.priceDay = priceDay;
-    }
 }

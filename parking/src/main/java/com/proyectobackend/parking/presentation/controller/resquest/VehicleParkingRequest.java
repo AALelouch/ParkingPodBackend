@@ -21,44 +21,4 @@ public class VehicleParkingRequest {
     private LocalDateTime entryDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime leaveDate;
-
-    public Long getIdCheck() {
-        return idCheck;
-    }
-
-    public void setIdCheck(Long idCheck) {
-        this.idCheck = idCheck;
-    }
-
-    public VehicleForVehicleParkingRequest getVehicle() {
-        return vehicle;
-    }
-
-    public void setVehicle(VehicleForVehicleParkingRequest vehicle) {
-        this.vehicle = vehicle;
-    }
-
-    public ParkingForVehicleParkingRequest getParking() {
-        return parking;
-    }
-
-    public void setParking(ParkingForVehicleParkingRequest parking) {
-        this.parking = parking;
-    }
-
-    public LocalDateTime getEntryDate() {
-        return entryDate;
-    }
-
-    public void setEntryDate(LocalDateTime entryDate) {
-        this.entryDate = entryDate;
-    }
-
-    public LocalDateTime getLeaveDate() {
-        return leaveDate;
-    }
-
-    public void setLeaveDate(LocalDateTime leaveDate) {
-        this.leaveDate = leaveDate;
-    }
 }

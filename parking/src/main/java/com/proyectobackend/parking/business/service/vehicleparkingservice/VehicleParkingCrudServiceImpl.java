@@ -77,10 +77,8 @@ public class VehicleParkingCrudServiceImpl implements com.proyectobackend.parkin
 
     @Override
     public void delete(Long id) {
-
-        vehicleParkingRepository.deleteById(id);
         VehicleParking vehicleParking =vehicleParkingRepository.findById(id).orElseThrow(() -> new VehicleParkingNotFoundException(id));
-
+        vehicleParkingRepository.deleteById(id);
         Parking parkingEntity = parkingRepository.findById(vehicleParking.getParking().getIdSlot()).orElseThrow(() -> new ParkingNotFoundException(vehicleParking.getParking().getIdSlot()));
         parkingEntity.setAvailable(true);
         parkingRepository.save(parkingEntity);

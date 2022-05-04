@@ -1,11 +1,11 @@
 package com.proyectobackend.parking.presentation.security.jwt;
 
-import com.proyectobackend.parking.presentation.security.jwt.exception.ProviderException;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 
@@ -37,15 +37,15 @@ public class JwtTokenProvider {
             return true;
 
         }catch (SignatureException e){
-            throw new ProviderException(HttpStatus.BAD_REQUEST, "Invalid JWT signature");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid JWT signature");
         }catch (MalformedJwtException e){
-            throw new ProviderException(HttpStatus.BAD_REQUEST, "Invalid JWT token");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid JWT token");
         }catch (ExpiredJwtException e){
-            throw new ProviderException(HttpStatus.BAD_REQUEST, "Expired JWT token");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Expired JWT token");
         }catch (UnsupportedJwtException e){
-            throw new ProviderException(HttpStatus.BAD_REQUEST, "Unsupported JWT token");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unsupported JWT token");
         }catch (IllegalArgumentException e){
-            throw new ProviderException(HttpStatus.BAD_REQUEST, "JWT claims string is empty");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "JWT claims string is empty");
         }
     }
 }

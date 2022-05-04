@@ -3,6 +3,8 @@ package com.proyectobackend.parking.presentation.controller;
 import com.proyectobackend.parking.business.service.vehicleparkingservice.interfaceofservice.CalculatePriceCommand;
 import com.proyectobackend.parking.business.service.vehicleparkingservice.interfaceofservice.ModifyLeaveDateCommand;
 import com.proyectobackend.parking.business.service.vehicleparkingservice.interfaceofservice.VehicleParkingCrudService;
+import com.proyectobackend.parking.business.service.vehicleparkingservice.interfaceofservice.VehicleParkingMongoCrudService;
+import com.proyectobackend.parking.persistence.entity.VehicleParking;
 import com.proyectobackend.parking.presentation.controller.response.VehicleParkingResponse;
 import com.proyectobackend.parking.presentation.controller.resquest.VehicleParkingRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class VehicleParkingController {
 
     @Autowired
     CalculatePriceCommand calculatePriceCommand;
+
+    @Autowired
+    VehicleParkingMongoCrudService vehicleParkingMongoCrudService;
 
     @GetMapping("/parking/vehicleParking/all")
     public List<VehicleParkingResponse> getVehicleParking() {
@@ -60,6 +65,7 @@ public class VehicleParkingController {
     @DeleteMapping("/parking/vehicleParking/delete/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteVehicleParking(@PathVariable Long id) {
+        vehicleParkingMongoCrudService.saveVehicleParking(vehicleParkingCrudService.findById(id).getBody());
         vehicleParkingCrudService.delete(id);
     }
 
