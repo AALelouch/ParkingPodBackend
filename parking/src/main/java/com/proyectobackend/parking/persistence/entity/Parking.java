@@ -20,6 +20,7 @@ public class Parking {
     private boolean available;
     private double priceHour;
     private double priceDay;
+    //private String plate;
 
     public Parking() {
     }
