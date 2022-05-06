@@ -1,4 +1,4 @@
-package com.proyectobackend.parking.business.service.vehicleparkingservice.util;
+package com.proyectobackend.parking.business.service.parkingservice.util;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

@@ -1,19 +1,32 @@
 package com.proyectobackend.parking.presentation.controller.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 public class ParkingResponse {
 
-    @JsonProperty(value = "idSlot", access = JsonProperty.Access.READ_ONLY)
     private Long idSlot;
-    @JsonProperty("available")
+
     private boolean available;
-    @JsonProperty("priceHour")
+
     private double priceHour;
-    @JsonProperty("priceDay")
+
     private double priceDay;
+
+    private VehicleResponse vehicleResponse;
+
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime entryDate;
+
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime leaveDate;
+
+    private Long hours;
+
+    private double totalPrice;
 }

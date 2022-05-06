@@ -19,10 +19,7 @@ public class GetByPlateOfVehicleQueryImpl implements com.proyectobackend.parking
 
     @Override
     public VehicleResponse getVehicleByPlate(String plate) {
-        Vehicle vehicle = vehicleRepository.findByPlate(plate);
-        if (vehicle == null) {
-            throw new VehicleNotFoundException(plate);
-        }
+        Vehicle vehicle = vehicleRepository.findByPlate(plate).orElseThrow((() -> new VehicleNotFoundException(plate)));
         return vehicleMapper.vehicleToVehicleResponse(vehicle);
     }
 }

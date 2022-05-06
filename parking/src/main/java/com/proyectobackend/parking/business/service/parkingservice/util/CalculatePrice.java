@@ -1,4 +1,4 @@
-package com.proyectobackend.parking.business.service.vehicleparkingservice.util;
+package com.proyectobackend.parking.business.service.parkingservice.util;
 
 public class CalculatePrice {
     public static double calculatePrice(Long hours, Double priceHour, Double priceDay) {
