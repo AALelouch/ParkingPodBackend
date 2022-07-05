@@ -10,6 +10,7 @@ import com.proyectobackend.parking.presentation.controller.resquest.LoginRequest
 import com.proyectobackend.parking.presentation.controller.resquest.SignUpRequest;
 import com.proyectobackend.parking.presentation.controller.resquest.exception.RoleNotFoundException;
 import com.proyectobackend.parking.presentation.security.jwt.JwtTokenProvider;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,7 @@ import java.util.Collections;
 
 @RestController
 @RequestMapping("/parking/auth")
+@SecurityRequirement(name = "bearerAuth")
 public class AuthController {
 
     @Autowired

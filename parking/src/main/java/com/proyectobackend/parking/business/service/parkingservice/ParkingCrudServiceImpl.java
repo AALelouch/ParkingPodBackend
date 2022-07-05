@@ -17,8 +17,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 public class ParkingCrudServiceImpl implements com.proyectobackend.parking.business.service.parkingservice.interfaceforservice.ParkingCrudService {
 
@@ -76,7 +74,7 @@ public class ParkingCrudServiceImpl implements com.proyectobackend.parking.busin
             parkingMap.setEntryDate(parking.getEntryDate());
             parkingMap.setLeaveDate(parking.getLeaveDate());
             parkingMap.setHours(CalculateHour.calculateHour(parking.getEntryDate(), parking.getLeaveDate()));
-            parkingMap.setTotalPrice(CalculatePrice.calculatePrice(parking.getHours(), parking.getPriceHour(), parking.getPriceDay()));
+            parkingMap.setTotalPrice(CalculatePrice.calculatePrice(parkingMap.getHours(), parking.getPriceHour(), parking.getPriceDay()));
 
             return parkingRepository.save(parkingMap);
         }).orElseGet(() -> {parking.setIdSlot(id); return parkingRepository.save(parking);});

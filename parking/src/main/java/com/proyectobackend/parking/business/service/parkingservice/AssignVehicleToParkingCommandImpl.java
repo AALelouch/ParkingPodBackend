@@ -3,6 +3,7 @@ package com.proyectobackend.parking.business.service.parkingservice;
 import com.proyectobackend.parking.business.mapper.responseMapper.ParkingResponseMapper;
 import com.proyectobackend.parking.business.mapper.responseMapper.VehicleResponseMapper;
 import com.proyectobackend.parking.business.service.parkingservice.exception.ParkingNotFoundException;
+import com.proyectobackend.parking.business.service.parkingservice.exception.PlateAlreadyAssignException;
 import com.proyectobackend.parking.business.service.parkingservice.interfaceforservice.AssignVehicleToParkingCommand;
 import com.proyectobackend.parking.business.service.parkingservice.util.CalculateHour;
 import com.proyectobackend.parking.business.service.parkingservice.util.CalculatePrice;
@@ -32,6 +33,10 @@ public class AssignVehicleToParkingCommandImpl implements AssignVehicleToParking
 
     @Override
     public ParkingResponse assignVehicleToParking(AssignRequest assignRequest) {
+        if(parkingRepository.findByPlate(assignRequest.getPlate()).isPresent()){
+            throw new PlateAlreadyAssignException(assignRequest.getPlate());
+        }
+
         Parking parking = parkingRepository.findById(assignRequest.getIdSlot()).orElseThrow(()-> new ParkingNotFoundException(assignRequest.getIdSlot()) );
         Vehicle vehicle = vehicleRepository.findByPlate(assignRequest.getPlate()).orElseThrow(()-> new ParkingNotFoundException(assignRequest.getPlate()) );
         parking.setPlate(vehicle.getPlate());
@@ -41,6 +46,7 @@ public class AssignVehicleToParkingCommandImpl implements AssignVehicleToParking
         parking.setTotalPrice(CalculatePrice.calculatePrice(parking.getHours(),parking.getPriceHour(), parking.getPriceDay()));
         parking.setAvailable(false);
         parkingRepository.save(parking);
+
         ParkingResponse parkingResponse = parkingMapperResponse.ParkingToParkingResponse(parking);
         parkingResponse.setVehicleResponse(vehicleMapperResponse.vehicleToVehicleResponse(vehicle));
         return parkingResponse;

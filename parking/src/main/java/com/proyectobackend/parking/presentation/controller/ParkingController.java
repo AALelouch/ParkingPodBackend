@@ -1,11 +1,11 @@
 package com.proyectobackend.parking.presentation.controller;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.proyectobackend.parking.business.service.parkingservice.GetParkingByPlateQueryImpl;
 import com.proyectobackend.parking.business.service.parkingservice.interfaceforservice.*;
 import com.proyectobackend.parking.presentation.controller.response.ParkingResponse;
 import com.proyectobackend.parking.presentation.controller.resquest.AssignRequest;
 import com.proyectobackend.parking.presentation.controller.resquest.ParkingRequest;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
+@SecurityRequirement(name = "bearerAuth")
 public class ParkingController {
     @Autowired
     GetTheNumberOfAvailableParkingQuery getTheNumberOfAvailableParkingQuery;
@@ -33,6 +34,12 @@ public class ParkingController {
 
     @Autowired
     AssignVehicleToParkingCommand assignVehicleToParkingCommand;
+
+     @Autowired
+    UnassignVehicleToParkingCommand unassignVehicleToParkingCommand;
+
+     @Autowired
+        GetByPlateRecordQuery getByPlateRecordQuery;
 
     @GetMapping("/parking/parkingSlot/available/number/")
     public String getTheNumberOfAvailableParking() {
@@ -59,6 +66,11 @@ public class ParkingController {
         return getParkingByPlateQuery.getParkingByPlate(plate);
     }
 
+    @GetMapping("/parking/parkingSlot/records/plate/{plate}/")
+    public List<ParkingResponse> getParkingRecordsByPlate(@PathVariable String plate) {
+        return getByPlateRecordQuery.getByPlateRecords(plate);
+    }
+
     @PostMapping("/parking/parkingSlot/add/")
     @ResponseStatus(value = HttpStatus.CREATED)
     public void createParking(@RequestBody ParkingRequest parkingRequest) {
@@ -82,10 +94,10 @@ public class ParkingController {
         return new ResponseEntity<>(assignVehicleToParkingCommand.assignVehicleToParking(assignRequest), HttpStatus.OK);
     }
 
-    @DeleteMapping("/parking/parkingSlot/delete/{id}/")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteParking(@PathVariable Long id) {
-        parkingCrudService.deleteParking(id);
+    @PutMapping("/parking/parkingSlot/unassignVehicle/{plate}/")
+    public ResponseEntity<ParkingResponse> unassignVehicleToParking(@PathVariable String plate) {
+        return new ResponseEntity<>(unassignVehicleToParkingCommand.unassignVehicleToParking(plate), HttpStatus.OK);
     }
+
 
 }

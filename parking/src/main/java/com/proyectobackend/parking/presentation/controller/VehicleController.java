@@ -4,6 +4,7 @@ import com.proyectobackend.parking.presentation.controller.resquest.VehicleReque
 import com.proyectobackend.parking.presentation.controller.response.VehicleResponse;
 import com.proyectobackend.parking.business.service.vehicleservice.interfaceforservice.GetByPlateOfVehicleQuery;
 import com.proyectobackend.parking.business.service.vehicleservice.interfaceforservice.VehicleCrudService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@SecurityRequirement(name = "bearerAuth")
 public class VehicleController {
     @Autowired
     private VehicleCrudService vehicleCrudService;

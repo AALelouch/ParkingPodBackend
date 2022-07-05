@@ -3,19 +3,16 @@ package com.proyectobackend.parking.persistence.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
 import java.time.LocalDateTime;
 
-@Entity
 @Getter
 @Setter
-public class Parking {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Document
+public class ParkingForMongoDb {
+
     private Long idSlot;
 
     private boolean available;
@@ -24,7 +21,7 @@ public class Parking {
 
     private double priceDay;
 
-    private String plate;
+    private VehicleForMongoDb vehicleForMongoDb;
 
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime entryDate;

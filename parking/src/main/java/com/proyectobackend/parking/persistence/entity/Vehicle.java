@@ -22,5 +22,14 @@ public class Vehicle {
     private String color;
     private String type;
 
-    public Vehicle() {}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vehicle vehicle = (Vehicle) o;
+        return
+                Objects.equals(plate, vehicle.plate) &&
+                Objects.equals(color, vehicle.color) &&
+                Objects.equals(type, vehicle.type);
+    }
 }
